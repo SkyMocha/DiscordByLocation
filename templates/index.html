@@ -1,0 +1,344 @@
+<html lang="en">
+<head>
+  <title>Discord By Location</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <base href="/">
+  <link rel='stylesheet' type="text/css" href="../style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+     
+      <a class="navbar-brand" href="https://media.discordapp.net/attachments/718473717901951136/718632800491929610/unknown.png?width=468&height=468">
+         <img alt="Qries" src="https://media.discordapp.net/attachments/718473717901951136/718632800491929610/unknown.png?width=468&height=468"
+         width="56" height="56"></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <!-- <li class="nav-item active"><a class="nav-link" href="#">Home</a></li> -->
+        <!-- <li class="nav-item"><a class="nav-link" href="#about">About</a></li> -->
+        <li class="nav-item"><a class="nav-link" href="#dropdown">Search</a></li>
+        <li class="nav-item"><a class="nav-link" href="#search" onclick="formVisibility()">Add Post</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item"><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id="about" class="container-fluid text-center" >    
+  <div class="row content">
+
+    <div class="col-fluid text-center"> 
+      <h1>About</h1>
+      <p style="font-family:'Courier New'; max-width: 65%; margin:auto; text-align: center;">  During these tough times, its important to make plans to hope for, and stay connected with friends, or even make new ones! The purpose of this website is to help you find Discord servers in your county or state for you to connect with people around you. It's good to stay in touch, and when all this is over, you can arrange events with your new-found friends! </p>
+    </div>
+  </div>
+</div>
+
+<div id="search" class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+    <h3>Search for Location</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div id="dropdown" class="col-6 text-center ln"> 
+      <button class="btn btn-lg btn-primary dropdown-toggle" type="button" data-toggle="dropdown">State 
+      <span class="caret"></span> </button>
+      <ul class="dropdown-menu dropdown-scroll">
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('01', 'AL')">Alabama</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('02', 'AK')">Alaska</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('04', 'AZ')">Arizona</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('05', 'AR')">Arkansas</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('06', 'CA')">California</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('08', 'CO')">Colorado</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('09', 'CT')">Connecticut</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('10', 'DE')">Deleware</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('11', 'DC')">D.C.</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('12', 'FL')">Florida</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('13', 'GA')">Georgia</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('15', 'HI')">Hawaii</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('16', 'ID')">Idaho</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('17', 'IL')">Illinois</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('18', 'IN')">Indiana</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('19', 'IA')">Iowa</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('20', 'KS')">Kansas</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('21', 'KY')">Kentucky</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('22', 'LA')">Lousiana</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('23', 'ME')">Maine</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('24', 'MD')">Maryland</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('25', 'MA')">Massachussets</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('26', 'MI')">Michigan</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('27', 'MN')">Minnesota</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('28', 'MS')">Mississippi</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('29', 'MO')">Missouri</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('30', 'MT')">Montana</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('31', 'NE')">Nebraska</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('32', 'NV')">Nevada</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('33', 'NH')">New Hampshire</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('34', 'NJ')">New Jersey</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('35', 'NM')">New Mexico</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('36', 'NY')">New York</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('37', 'NC')">North Carolina</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('38', 'ND')">North Dakota</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('39', 'OH')">Ohio</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('40', 'OK')">Oklahoma</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('41', 'OR')">Oregon</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('42', 'PA')">Pennsylvania</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('42', 'RI')">Rhode Island</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('44', 'SC')">South Carolina</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('45', 'SD')">South Dakota</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('46', 'TN')">Tenessee</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('47', 'TX')">Texas</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('48', 'UT')">Utah</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('49', 'VT')">Vermont</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('50', 'VA')">Virginia</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('53', 'WA')">Washington</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('54', 'WV')">West Virginia</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('55', 'WI')">Wisconsin</a></li>
+        <li><a class="dropdown-item" href="#" onclick="dropDownForState('56', 'WY')">Wyoming</a></li>
+      </ul>
+      <p id="state_name"> </p>
+    </div>
+
+  <div class="col-6 dropdown text-center ln"> 
+
+    <button class="btn btn-lg btn-primary dropdown-toggle" type="button" data-toggle="dropdown">County 
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-scroll" id="counties">
+
+
+    </ul>
+    <p id="county_name"> </p>
+  </div>
+</div>
+</div>
+
+<div id="addpost" class="container-fluid text-center">
+  <form id="form" style="display: none;">
+    <label for="fname">Server Name:</label><br>
+    <input type="text" id="sname" name="sname"><br>
+    <label for="lname">Discord Link:</label><br>
+    <input type="text" id="dname" name="dname"><br>
+    <label for="lname">Description:</label><br>
+    <input type="text" id="desc" name="desc"><br>
+    <br>
+    <button type="button" class="btn btn-white btn-lg" onclick="submitForm()" style="background: pink;">Submit</button>
+  </form>
+
+</div>
+
+<div class="container-fluid">
+
+  <div id="servers" class="card-group">
+  
+    <div class="card-container">
+      <div class="card-body">
+        <h5 class="card-title">Mercer, NJ</h5>
+        <p class="card-text">The Peddie School Hackathon</p>
+        <a href="htpps://discord.gg/Zprs7yC" class="btn btn-primary"> Invite </a>
+      </div> 
+    </div>
+
+  </div>
+
+</div>
+  
+<style>
+  footer {
+    background-color: transparent;
+    padding-top: 3%;
+  }
+</style>
+<footer class="container-fluid text-center">
+  <p>Started By Code Birds; Finished By SkyMocha</p>
+</footer>
+
+</body>
+
+
+<script> 
+
+  var formVisible = false;
+  var currState, currCounty;
+  setState ('None', 'None');
+
+  function showForm () {
+    let form = document.getElementById('form');
+    form.style.display = 'block';
+  }
+
+  function hideForm () {
+    let form = document.getElementById('form');
+    form.style.display = 'none';
+  }
+
+  function formVisibility() {
+    if (formVisible)
+      hideForm();
+    else
+      showForm();
+    formVisible = !formVisible;
+  }
+
+  // Gets all counties and for a specific state and state code
+  function dropDownForState (state, stateCode) {
+
+    console.log (`${state} | ${stateCode} SELECTED`);
+
+    document.getElementById('state_name').innerHTML = stateCode;
+
+    document.getElementById('counties').innerHTML = "";
+
+    let query = { state: state };
+
+    $.post("/api/counties", query,
+    function(data, status){
+      console.log (data);
+      data.forEach (county => {
+        console.log (county);
+        document.getElementById('counties').innerHTML += `<li><a class="dropdown-item" href="#" onclick="sort('${stateCode}', '${county}')">${county}</a></li>`
+      });
+    });
+
+    query = {
+      state: stateCode
+    }
+
+    $.post("/api/sort", query,
+    function(data, status){
+      showServers(data.result);
+    });
+
+  }
+
+  // Loads all servers
+  function loadAllServers () {
+    $.get("/api/servers", function(data, status){
+      showServers(data.result);
+    });
+
+  }
+
+  // Shows all servers or a "NOTHING FOUND" depending on the array given
+  function showServers (list) {
+    document.getElementById ('servers').innerHTML = "";
+    if (list.length == 0) {
+      document.getElementById('servers').innerHTML = `<h5 class="text-center" style="margin: auto;">NOTHING FOUND</h5>`;
+    }
+    else { 
+      list.forEach (server => {
+        document.getElementById ('servers').innerHTML += `<div class="card-container">
+          <div class="card-body">
+            <h5 class="card-text underline" style="color:black">${server.name}</h5>
+            <i><p class="card-title" style="color:black">${server.county}, ${server.state}</p></i>
+            <p class="card-text" style="color:black">${server.desc}</p>
+            <a href="${server.disc_server}" target="blank" class="btn btn-primary"> Invite </a>
+          </div> 
+        </div>`;
+      });
+    }
+  }
+
+  function submitForm () {
+
+    let dname = document.getElementById('dname').value;
+    let sname = document.getElementById('sname').value;
+    let desc = document.getElementById('desc').value;
+
+    if (sname.length <= 1 || desc.length <= 2 || !dname.includes('discord') || !dname.includes('http://'))
+      return alert("You must enter a valid URL (ie. http://discord.gg/ppmaxad), description, and name!");
+
+    else if (currState == "None" || currCounty == "None")
+      return alert("You must enter a state and county!");
+
+    addServer (
+
+      '000',
+      dname,
+      sname,
+      currState,
+      currCounty,
+      desc
+
+    );
+  }
+
+  // Sends a request to the back-end to add a server
+  function addServer (id, disc_url, name, state, county, desc) {
+
+    let server = {
+
+      id: id,
+      disc_url: disc_url,
+      name: name,
+      state: state,
+      county: county,
+      desc: desc
+
+    }
+
+    console.log ("SENDING SERVER");
+    console.log (server);
+
+    // A janky solution that reloads the page after 1/3 of a second
+    setTimeout(function(){ location.reload(); }, 333);
+
+    $.post("/api/add", server,
+    function(data, status){
+      alert(`SERVER "${name}" WITH URL "${disc_url}" ADDED`);
+      location.reload();
+    });
+  }
+
+  // Displays all servers under a state CODE (ie. NJ) and county name
+  function sort (fState, fCounty) {
+
+    setState(fState, fCounty);
+
+    let query = {
+      state: fState,
+      county: fCounty
+    }
+
+    console.log ("Searching by:");
+    console.log (query);
+
+    $.post("/api/sort", query,
+    function(data, status){
+      showServers (data.final);
+    });
+  }
+
+  function setState (fState, fCounty) {
+    currState = fState;
+    currCounty = fCounty;
+
+    document.getElementById('state_name').innerHTML = `${fState}`;
+    document.getElementById('county_name').innerHTML = `${fCounty}`;
+
+  }
+
+  loadAllServers();
+
+</script>
+</html>

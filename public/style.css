@@ -1,0 +1,119 @@
+.underline {
+    text-decoration: underline
+}
+
+li a {
+    color: black;
+}
+
+.btn, .btn-primary {
+    background: #e75480 !important;
+    /* color: pink !important; */
+}
+
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+body {
+    background: url("./assets/cherry_blossom.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    background-color: green;
+    height: 100%;
+}
+.addpost {
+    background-color: #FF6600;
+    color: orange;
+    padding: 15px;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+    background-color: #FF6600;
+    color: black;
+    padding: 15px;
+}
+p {
+    text-align: center;
+    color: black;
+} 
+h1, h3, h5
+{
+    text-align: center;
+    color: black;
+}
+form label { color: black; }
+
+.dropdown-scroll
+{
+    height: 200px;
+    width: 150px;
+    overflow-y: auto;
+    
+}
+
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {height:auto;} 
+}
+
+
+/* ABOUT SECTION */
+#about {
+    height: fit-content;
+    padding-bottom: 5%;
+}
+#about .content {
+    height: fit-content;
+}
+#about .content .col-fluid {
+height: fit-content;
+}
+#about .content .col-fluid h1 {
+    text-decoration: underline black;
+}
+
+/* SERVER CARDS */
+#servers {
+    background: transparent;
+  }
+@media (orientation: landscape) {
+    #servers .card-container {
+        /* background: transparent; */
+        padding: 5px;
+        width: 33%;
+        height: auto;
+    }
+}
+@media (orientation: portrait) {
+    #servers .card-container {
+        /* background: transparent; */
+        padding: 5px;
+        width: 100%;
+        height: auto;
+    }
+}
+#servers .card-container .card-body {
+    background: pink; 
+    width: 85%;
+    height: auto;
+    margin: auto;
+    border-radius: 25px;
+    border: 2px solid black;
+}
