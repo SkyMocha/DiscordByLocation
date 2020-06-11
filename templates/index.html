@@ -26,19 +26,16 @@
         <span class="icon-bar"></span>                        
       </button>
      
-      <a class="navbar-brand" href="https://media.discordapp.net/attachments/718473717901951136/718632800491929610/unknown.png?width=468&height=468">
+      <a class="navbar-brand">
          <img alt="Qries" src="https://media.discordapp.net/attachments/718473717901951136/718632800491929610/unknown.png?width=468&height=468"
          width="56" height="56"></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <!-- <li class="nav-item active"><a class="nav-link" href="#">Home</a></li> -->
-        <!-- <li class="nav-item"><a class="nav-link" href="#about">About</a></li> -->
-        <li class="nav-item"><a class="nav-link" href="#dropdown">Search</a></li>
-        <li class="nav-item"><a class="nav-link" href="#search" onclick="formVisibility()">Add Post</a></li>
+        <li class="nav-item"><a class="nav-link" onclick="formVisibility()">Add Post</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item"><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li class="nav-item"><a class="nav-link" onclick="login()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </div>
@@ -57,7 +54,7 @@
 <div id="search" class="container">
   <div class="row">
     <div class="col-12 text-center">
-    <h3>Search for Location</h3>
+    <h3>Select Location</h3>
     </div>
   </div>
   <div class="row">
@@ -144,7 +141,6 @@
     <br>
     <button type="button" class="btn btn-white btn-lg" onclick="submitForm()" style="background: pink;">Submit</button>
   </form>
-
 </div>
 
 <div class="container-fluid">
@@ -182,9 +178,42 @@
   var currState, currCounty;
   setState ('None', 'None');
 
+  // CHECKS LOG IN STATUS
+  var token = window.location.href.split('token=')[1];
+  if (!token && !document.cookie)
+    console.log ("NOT LOGGED IN");
+  // Checks to see if the current token is stored in the document.cookie 
+  else if (token) {
+    document.cookie = token;
+    user(token);
+  }
+  // If the cookie doesnt exist but the token exists it sets the cookie to the token
+  else if (document.cookie) {
+    user(document.cookie);
+  }
+
+  function login () {
+    if (token || document.cookie)
+      alert("Youre already logged in!");
+    else
+      window.location.href = "/auth";
+  }
+
+  function user (user_token) {
+    console.log (`TOKEN: ${user_token}`);
+    $.post("/api/user", { random_token: user_token } ,
+    function(data, status){
+      console.log (data);
+    });
+  }
+
   function showForm () {
-    let form = document.getElementById('form');
-    form.style.display = 'block';
+    if (token || document.cookie) {
+      let form = document.getElementById('form');
+      form.style.display = 'block';
+    }
+    else
+      alert ("You must log in before adding a posting!");
   }
 
   function hideForm () {
