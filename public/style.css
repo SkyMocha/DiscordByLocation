@@ -93,13 +93,24 @@ height: fit-content;
 /* SERVER CARDS */
 #servers {
     background: transparent;
-  }
+}
 @media (orientation: landscape) {
     #servers .card-container {
         /* background: transparent; */
         padding: 5px;
         width: 33%;
         height: auto;
+    }
+    #servers .card-container .card-body {
+        background: pink; 
+        width: 85%;
+        height: 100%;
+        margin: auto;
+        border-radius: 25px;
+        border: 2px solid black;
+    }
+    .landscape-only {
+        display: block;
     }
 }
 @media (orientation: portrait) {
@@ -109,12 +120,27 @@ height: fit-content;
         width: 100%;
         height: auto;
     }
+    #servers .card-container .card-body {
+        background: pink; 
+        width: 85%;
+        height: auto;
+        margin: auto;
+        border-radius: 25px;
+        border: 2px solid black;
+    }
+    .landscape-only {
+        display: none;
+    }
 }
-#servers .card-container .card-body {
-    background: pink; 
-    width: 85%;
-    height: auto;
-    margin: auto;
-    border-radius: 25px;
-    border: 2px solid black;
+
+#servers .card-container .card-body a {
+    color: white;
+    cursor: pointer;
+    border: #e75480;
+}
+#servers .card-container .card-body a:hover {
+    color: rgb(228, 220, 220);
+    cursor: pointer;
+    border: #e75480;
+    filter: brightness(112%);
 }

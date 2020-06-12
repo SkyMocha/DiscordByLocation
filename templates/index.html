@@ -1,17 +1,19 @@
 <html lang="en">
 <head>
   <title>Discord By Location</title>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Discord By Location is a website that pairs Discord servers to a specific location for people to find!">
+  <meta name="keywords" content="Discord, Location, Servers">
+  <meta name="author" content="SkyMocha">
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
   <base href="/">
   <link rel='stylesheet' type="text/css" href="../style.css">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -31,7 +33,7 @@
          width="56" height="56"></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav landscape-only">
         <li class="nav-item"><a class="nav-link" onclick="formVisibility()">Add Post</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -51,13 +53,14 @@
   </div>
 </div>
 
+<!-- TODO: MAKE SURE STATE/COUNTY PAIRINGS ARE CORRECT -->
 <div id="search" class="container">
   <div class="row">
     <div class="col-12 text-center">
     <h3>Select Location</h3>
     </div>
   </div>
-  <div class="row">
+  <div class="row" style="width: 75%; margin: auto;">
     <div id="dropdown" class="col-6 text-center ln"> 
       <button class="btn btn-lg btn-primary dropdown-toggle" type="button" data-toggle="dropdown">State 
       <span class="caret"></span> </button>
@@ -119,25 +122,35 @@
 
   <div class="col-6 dropdown text-center ln"> 
 
+    <!-- COUNTIES AUTOFILLED BY API -->
     <button class="btn btn-lg btn-primary dropdown-toggle" type="button" data-toggle="dropdown">County 
     <span class="caret"></span></button>
     <ul class="dropdown-menu dropdown-scroll" id="counties">
 
 
     </ul>
+
     <p id="county_name"> </p>
   </div>
 </div>
 </div>
 
-<div id="addpost" class="container-fluid text-center">
+<div id="addpost" class="container-fluid text-center landscape-only ">
   <form id="form" style="display: none;">
-    <label for="fname">Server Name:</label><br>
-    <input type="text" id="sname" name="sname"><br>
-    <label for="lname">Discord Link:</label><br>
-    <input type="text" id="dname" name="dname"><br>
-    <label for="lname">Description:</label><br>
-    <input type="text" id="desc" name="desc"><br>
+    <div class="row" style="margin: auto; width: fit-content;">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="user_servers_button">
+          Server Name
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="user_servers">
+          
+        </div>
+      </div>&nbsp;
+
+      <input type="text" id="desc" name="desc" placeholder="Description" style="width: 35vw;">&nbsp;
+      <input type="text" id="dname" name="dname" placeholder="Discord Link">
+
+    </div>
     <br>
     <button type="button" class="btn btn-white btn-lg" onclick="submitForm()" style="background: pink;">Submit</button>
   </form>
@@ -176,6 +189,7 @@
 
   var formVisible = false;
   var currState, currCounty;
+  var currServerName;
   setState ('None', 'None');
 
   // CHECKS LOG IN STATUS
@@ -185,11 +199,13 @@
   // Checks to see if the current token is stored in the document.cookie 
   else if (token) {
     document.cookie = token;
-    user(token);
+    user(document.cookie);
+    getUserServers(document.cookie);
   }
   // If the cookie doesnt exist but the token exists it sets the cookie to the token
   else if (document.cookie) {
     user(document.cookie);
+    getUserServers(document.cookie);
   }
 
   function login () {
@@ -207,6 +223,7 @@
     });
   }
 
+  // Shows/hides the form for adding a posting
   function showForm () {
     if (token || document.cookie) {
       let form = document.getElementById('form');
@@ -215,7 +232,6 @@
     else
       alert ("You must log in before adding a posting!");
   }
-
   function hideForm () {
     let form = document.getElementById('form');
     form.style.display = 'none';
@@ -260,6 +276,27 @@
 
   }
 
+  // GETS ALL THE SERVERS FOR A USER AND LISTS THEM FOR ADD POSTINGS
+  function getUserServers (user_token) {
+    
+    $.post("/api/user/servers", { random_token: user_token },
+    function(data, status){
+      let user_servers = document.getElementById('user_servers');
+      data.forEach (server => {
+        if (server.owner)
+          user_servers.innerHTML += `<a class="dropdown-item" onclick="selectServer('${server.name}')">${server.name}</a>`
+      })
+    });
+
+  }
+
+  // Select server function for the add post server selection
+  function selectServer (name) {
+    let serverButton = document.getElementById('user_servers_button');
+    serverButton.innerHTML = name;
+    currServerName = name;
+  }
+
   // Loads all servers
   function loadAllServers () {
     $.get("/api/servers", function(data, status){
@@ -282,6 +319,7 @@
             <i><p class="card-title" style="color:black">${server.county}, ${server.state}</p></i>
             <p class="card-text" style="color:black">${server.desc}</p>
             <a href="${server.disc_server}" target="blank" class="btn btn-primary"> Invite </a>
+            <a onclick="deleteServer(${server.id})"class="btn btn-primary" style="float: right;"> Del </a>
           </div> 
         </div>`;
       });
@@ -291,11 +329,14 @@
   function submitForm () {
 
     let dname = document.getElementById('dname').value;
-    let sname = document.getElementById('sname').value;
+    let sname = currServerName;
     let desc = document.getElementById('desc').value;
 
-    if (sname.length <= 1 || desc.length <= 2 || !dname.includes('discord') || !dname.includes('http://'))
-      return alert("You must enter a valid URL (ie. http://discord.gg/ppmaxad), description, and name!");
+    if (desc.length <= 2 || desc.length >= 150)
+      return alert("You must enter a valid description! (below 150 chars, above 2 chars)");
+
+    else if (!dname.includes('disc') || ( !dname.includes('http://') && !dname.includes('https://')))
+     return alert ("You must enter a valid URL (ie. http://discord.gg/ppmaxad)");
 
     else if (currState == "None" || currCounty == "None")
       return alert("You must enter a state and county!");
@@ -366,6 +407,12 @@
     document.getElementById('county_name').innerHTML = `${fCounty}`;
 
   }
+
+  function deleteServer (name) {
+
+  }
+
+  var rand = function() { return Math.random().toString(36).substr(2); };
 
   loadAllServers();
 

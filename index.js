@@ -20,6 +20,9 @@ const oauth = new DiscordOauth2();
 var countyList = JSON.parse(fs.readFileSync(path.join(__dirname + '/gz_2010_us_050_00_20m.json'))).features;
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(express.static(__dirname + '/public'));
 
 // Connects to the Mongo Database
@@ -49,24 +52,13 @@ app.get('/login',function(req,res) {
   res.sendFile(path.join(__dirname + '/templates/login.html'));
 });
 
-
-// Passport Config
-// require('./config/passport')(passport);
-// // Passport Middleware
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// app.get('*', function(req, res, next){
-//   res.locals.user = req.user || null;
-//   next();
-// });
-
 // Get all servers
 app.get ('/api/servers', function (req, res) {
 
   servers.find({}).toArray(function(err, result) {
     if (err) throw err;
     console.log ("FETCHING RESULT");
+    result = result.slice(0, 50);
     // console.log (result);
     res.json ({ result });
   });
@@ -231,14 +223,27 @@ function addOrUpdateUser (mongo_user) {
 // Gets the user based on the random token
 app.post ('/api/user', function (req, res) {
 
-  console.log (req.body);
   let random_token = req.body.random_token;
   console.log (random_token);
 
   // Finds the mongoDB access token for Discord and returns the Discord User
-  users.find ( { $random_token: random_token } ).toArray(function(err, result) { 
+  users.find ( { random_token: random_token } ).toArray(function(err, result) { 
     console.log (result);
     oauth.getUser(result[0].accessToken).then( token => res.json(token) );
+  });
+
+}); 
+
+// Gets the users servers based on the token
+app.post ('/api/user/servers', function (req, res) {
+
+  let random_token = req.body.random_token;
+  // console.log (random_token);
+
+  // Finds the mongoDB access token for Discord and returns the Discord User
+  users.find ( { random_token: random_token } ).toArray(function(err, result) { 
+    // console.log (result);
+    oauth.getUserGuilds(result[0].accessToken).then( token => res.json(token) );
   });
 
 }); 
